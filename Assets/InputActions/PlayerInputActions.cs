@@ -142,6 +142,176 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Drone"",
+            ""id"": ""cc1d9252-11b2-4f09-9e70-025c6d69850f"",
+            ""actions"": [
+                {
+                    ""name"": ""Thrust"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8116de2-c0f7-4988-a8f5-77582dc49b5f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""type"": ""Value"",
+                    ""id"": ""918f191a-ae9c-4587-a915-3cc377882c77"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""075e8efe-40ee-40ff-93dd-41a160f6e5f3"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Thrust"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""609141d0-095f-4cb5-b5ee-e5bef43cb8e9"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Thrust"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""878f5c32-160b-4922-aaca-7686e808da4d"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Thrust"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""333b752d-d32a-4d8a-8748-c9df627a4dc7"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""9d9f9e3e-0ce2-4b7c-8ee9-5ad2e5d1a295"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""9fecbf37-60dd-4e66-bdb5-20b72e809578"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""53ce0b56-e1a3-47bf-9e0a-76e75103d70e"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert"",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""75bb45ef-7807-4869-9025-0ee56eb25bc9"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert"",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
+        },
+        {
+            ""name"": ""Forklift"",
+            ""id"": ""5df4411a-c20e-4f8a-a012-38ce26d788df"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""5ecf7a0e-a76a-4ec7-babd-0efb485e0d8d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9ace9eba-0638-499b-8719-47f426cfdb77"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Crate"",
+            ""id"": ""53e56863-0d34-4f6a-8e0a-044c65db017c"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""a24c316b-ac21-4749-b5ea-88a1c88ebaed"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5f41e511-3e10-4d97-81f2-39fe3e95469f"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -153,6 +323,16 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_IneractiveZones = asset.FindActionMap("IneractiveZones", throwIfNotFound: true);
         m_IneractiveZones_Interact = m_IneractiveZones.FindAction("Interact", throwIfNotFound: true);
         m_IneractiveZones_Escape = m_IneractiveZones.FindAction("Escape", throwIfNotFound: true);
+        // Drone
+        m_Drone = asset.FindActionMap("Drone", throwIfNotFound: true);
+        m_Drone_Thrust = m_Drone.FindAction("Thrust", throwIfNotFound: true);
+        m_Drone_WASD = m_Drone.FindAction("WASD", throwIfNotFound: true);
+        // Forklift
+        m_Forklift = asset.FindActionMap("Forklift", throwIfNotFound: true);
+        m_Forklift_Newaction = m_Forklift.FindAction("New action", throwIfNotFound: true);
+        // Crate
+        m_Crate = asset.FindActionMap("Crate", throwIfNotFound: true);
+        m_Crate_Newaction = m_Crate.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -282,6 +462,113 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         }
     }
     public IneractiveZonesActions @IneractiveZones => new IneractiveZonesActions(this);
+
+    // Drone
+    private readonly InputActionMap m_Drone;
+    private IDroneActions m_DroneActionsCallbackInterface;
+    private readonly InputAction m_Drone_Thrust;
+    private readonly InputAction m_Drone_WASD;
+    public struct DroneActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public DroneActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Thrust => m_Wrapper.m_Drone_Thrust;
+        public InputAction @WASD => m_Wrapper.m_Drone_WASD;
+        public InputActionMap Get() { return m_Wrapper.m_Drone; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DroneActions set) { return set.Get(); }
+        public void SetCallbacks(IDroneActions instance)
+        {
+            if (m_Wrapper.m_DroneActionsCallbackInterface != null)
+            {
+                @Thrust.started -= m_Wrapper.m_DroneActionsCallbackInterface.OnThrust;
+                @Thrust.performed -= m_Wrapper.m_DroneActionsCallbackInterface.OnThrust;
+                @Thrust.canceled -= m_Wrapper.m_DroneActionsCallbackInterface.OnThrust;
+                @WASD.started -= m_Wrapper.m_DroneActionsCallbackInterface.OnWASD;
+                @WASD.performed -= m_Wrapper.m_DroneActionsCallbackInterface.OnWASD;
+                @WASD.canceled -= m_Wrapper.m_DroneActionsCallbackInterface.OnWASD;
+            }
+            m_Wrapper.m_DroneActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Thrust.started += instance.OnThrust;
+                @Thrust.performed += instance.OnThrust;
+                @Thrust.canceled += instance.OnThrust;
+                @WASD.started += instance.OnWASD;
+                @WASD.performed += instance.OnWASD;
+                @WASD.canceled += instance.OnWASD;
+            }
+        }
+    }
+    public DroneActions @Drone => new DroneActions(this);
+
+    // Forklift
+    private readonly InputActionMap m_Forklift;
+    private IForkliftActions m_ForkliftActionsCallbackInterface;
+    private readonly InputAction m_Forklift_Newaction;
+    public struct ForkliftActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public ForkliftActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_Forklift_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_Forklift; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ForkliftActions set) { return set.Get(); }
+        public void SetCallbacks(IForkliftActions instance)
+        {
+            if (m_Wrapper.m_ForkliftActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_ForkliftActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_ForkliftActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_ForkliftActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_ForkliftActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public ForkliftActions @Forklift => new ForkliftActions(this);
+
+    // Crate
+    private readonly InputActionMap m_Crate;
+    private ICrateActions m_CrateActionsCallbackInterface;
+    private readonly InputAction m_Crate_Newaction;
+    public struct CrateActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public CrateActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_Crate_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_Crate; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CrateActions set) { return set.Get(); }
+        public void SetCallbacks(ICrateActions instance)
+        {
+            if (m_Wrapper.m_CrateActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_CrateActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_CrateActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_CrateActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_CrateActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public CrateActions @Crate => new CrateActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -290,5 +577,18 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         void OnInteract(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
+    }
+    public interface IDroneActions
+    {
+        void OnThrust(InputAction.CallbackContext context);
+        void OnWASD(InputAction.CallbackContext context);
+    }
+    public interface IForkliftActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
+    }
+    public interface ICrateActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

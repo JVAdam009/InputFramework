@@ -30,7 +30,14 @@ public class InputManager : MonoBehaviour
 
     public PlayerInputActions.IneractiveZonesActions _zonesActions;
 
+    private PlayerInputActions.DroneActions _droneActions;
+
+    private PlayerInputActions.ForkliftActions _forkliftActions;
+
+    private PlayerInputActions.CrateActions _crateActions;
+
     [SerializeField] private Player _player;
+    [SerializeField] private Drone _drone;
 
 
     private void Awake()
@@ -53,6 +60,13 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         CalculatePlayerMovement();
+        CalculateDrone();
+    }
+
+    void CalculateDrone()
+    {
+        _drone.SetMovementDirection(_droneActions.WASD.ReadValue<Vector2>());
+        _drone.SetThrustDirection(_droneActions.Thrust.ReadValue<float>());
     }
 
     private void InitInput()
@@ -62,5 +76,35 @@ public class InputManager : MonoBehaviour
         _playerActions.Enable();
         _zonesActions = _input.IneractiveZones;
         _zonesActions.Enable();
+        _droneActions = _input.Drone;
+        _forkliftActions = _input.Forklift;
+        _crateActions = _input.Crate;
+    }
+
+    public void ActivatePlayer()
+    {
+        _droneActions.Disable();
+        _forkliftActions.Disable();
+        _playerActions.Enable();
+        _zonesActions.Enable();
+        _crateActions.Enable();
+    }
+
+    public void ActivateDrone()
+    {
+        _droneActions.Enable();
+        _forkliftActions.Disable();
+        _playerActions.Disable();
+        _zonesActions.Disable();
+        _crateActions.Disable();
+    }
+
+    public void ActivateForklift()
+    {
+        _droneActions.Disable();
+        _forkliftActions.Enable();
+        _playerActions.Disable();
+        _zonesActions.Disable();
+        _crateActions.Disable();
     }
 }
