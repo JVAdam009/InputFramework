@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 namespace Game.Scripts.LiveObjects
 {
@@ -20,20 +22,72 @@ namespace Game.Scripts.LiveObjects
         [SerializeField]
         private InteractableZone _interactableZone;
 
+        private PlayerInputActions.IneractiveZonesActions _actions;
+
+        private bool interacting = false;
+        private bool leaving = false;
         public static event Action onHackComplete;
         public static event Action onHackEnded;
 
-        private void OnEnable()
+        private void Start()
         {
-            InteractableZone.onHoldStarted += InteractableZone_onHoldStarted;
-            InteractableZone.onHoldEnded += InteractableZone_onHoldEnded;
+            _actions = InputManager.Instance._input.IneractiveZones;
+            _actions.Enable();
+            _actions.Interact.performed += Interact;
+            _actions.Interact.canceled += InteractStop;
+            _actions.Escape.performed += Escape;
+            _actions.Escape.canceled += EscapeStop;
         }
+
+        private void EscapeStop(InputAction.CallbackContext obj)
+        {
+            if (_interactableZone.InZone())
+            {
+                leaving = false;
+            }
+        }
+
+        private void InteractStop(InputAction.CallbackContext obj)
+        {
+            if (obj.interaction is HoldInteraction && _interactableZone.InZone())
+            {
+                InteractableZone_onHoldEnded(_interactableZone.GetZoneID());
+            }
+            else
+            {
+                interacting = false;
+            }
+        }
+
+        private void Escape(InputAction.CallbackContext obj)
+        {
+            if (_interactableZone.InZone())
+            {
+                leaving = true;
+            }
+        }
+
+        private void Interact(InputAction.CallbackContext obj)
+        {
+            if (obj.interaction is HoldInteraction && _interactableZone.InZone())
+            {
+                InteractableZone_onHoldStarted(_interactableZone.GetZoneID());
+            }
+            else if(_interactableZone.InZone())
+            {
+                interacting = true;
+                InteractableZone_onHoldStarted(_interactableZone.GetZoneID());
+            }
+        }
+
+
+ 
 
         private void Update()
         {
             if (_hacked == true)
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (interacting)
                 {
                     var previous = _activeCamera;
                     _activeCamera++;
@@ -45,13 +99,15 @@ namespace Game.Scripts.LiveObjects
 
                     _cameras[_activeCamera].Priority = 11;
                     _cameras[previous].Priority = 9;
+                    interacting = false;
                 }
 
-                if (Input.GetKeyDown(KeyCode.Escape))
+                if (leaving)
                 {
                     _hacked = false;
                     onHackEnded?.Invoke();
                     ResetCameras();
+                    leaving = false;
                 }
             }
         }
@@ -108,11 +164,7 @@ namespace Game.Scripts.LiveObjects
             _cameras[0].Priority = 11;
         }
         
-        private void OnDisable()
-        {
-            InteractableZone.onHoldStarted -= InteractableZone_onHoldStarted;
-            InteractableZone.onHoldEnded -= InteractableZone_onHoldEnded;
-        }
+
     }
 
 }

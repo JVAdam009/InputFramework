@@ -29,18 +29,18 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Movement"",
-                    ""type"": ""Value"",
-                    ""id"": ""82f23762-3fe0-42a7-9031-c52331a22e88"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""type"": ""Button"",
+                    ""id"": ""fe24a35b-ea36-485c-b509-6c6d2a1c1903"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": ""WASD"",
-                    ""id"": ""34ccd36d-bc1d-4b87-b4d6-68ae48f68a3a"",
+                    ""id"": ""94971b57-2ebb-442b-90c9-fac9a8654528"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -51,7 +51,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""f2c10eb7-bf4e-412f-b771-ff0a9e0f664c"",
+                    ""id"": ""1db23feb-60c7-4505-a294-5c5f7c0b67d7"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -62,7 +62,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""c4d3b29a-55de-4d2b-bc5c-fadbb2dc691c"",
+                    ""id"": ""dc42f0a2-042c-4c86-b46a-37782a7565c3"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -73,7 +73,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""ba573490-d22d-402c-8265-a47694454f17"",
+                    ""id"": ""d690e646-4385-4ed6-bc47-fc1cee0a43d7"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -84,7 +84,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""2252d983-d8aa-4c7a-a24c-f7c683146488"",
+                    ""id"": ""68248bfd-f6e2-460c-a854-1b012046cc0c"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -94,6 +94,54 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""IneractiveZones"",
+            ""id"": ""96347c20-9c00-4382-bfb5-80ea1275a097"",
+            ""actions"": [
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e0c89be-6e09-4a89-ad25-f02ccffe05bf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""28937b5e-d79a-4274-8d97-6236ba4b0c1e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5dc5990c-4c9c-4b3f-b15d-ebbd29bedc33"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Press,Hold(duration=0.6)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""52294106-a37a-4a0c-9ee2-ac4bde499226"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -101,6 +149,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        // IneractiveZones
+        m_IneractiveZones = asset.FindActionMap("IneractiveZones", throwIfNotFound: true);
+        m_IneractiveZones_Interact = m_IneractiveZones.FindAction("Interact", throwIfNotFound: true);
+        m_IneractiveZones_Escape = m_IneractiveZones.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -189,8 +241,54 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // IneractiveZones
+    private readonly InputActionMap m_IneractiveZones;
+    private IIneractiveZonesActions m_IneractiveZonesActionsCallbackInterface;
+    private readonly InputAction m_IneractiveZones_Interact;
+    private readonly InputAction m_IneractiveZones_Escape;
+    public struct IneractiveZonesActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public IneractiveZonesActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Interact => m_Wrapper.m_IneractiveZones_Interact;
+        public InputAction @Escape => m_Wrapper.m_IneractiveZones_Escape;
+        public InputActionMap Get() { return m_Wrapper.m_IneractiveZones; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(IneractiveZonesActions set) { return set.Get(); }
+        public void SetCallbacks(IIneractiveZonesActions instance)
+        {
+            if (m_Wrapper.m_IneractiveZonesActionsCallbackInterface != null)
+            {
+                @Interact.started -= m_Wrapper.m_IneractiveZonesActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_IneractiveZonesActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_IneractiveZonesActionsCallbackInterface.OnInteract;
+                @Escape.started -= m_Wrapper.m_IneractiveZonesActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_IneractiveZonesActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_IneractiveZonesActionsCallbackInterface.OnEscape;
+            }
+            m_Wrapper.m_IneractiveZonesActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
+            }
+        }
+    }
+    public IneractiveZonesActions @IneractiveZones => new IneractiveZonesActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
+    }
+    public interface IIneractiveZonesActions
+    {
+        void OnInteract(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
 }
