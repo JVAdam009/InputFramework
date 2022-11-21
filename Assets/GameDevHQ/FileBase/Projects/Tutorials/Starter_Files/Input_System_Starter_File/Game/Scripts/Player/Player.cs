@@ -22,6 +22,9 @@ namespace Game.Scripts.Player
         [SerializeField]
         private GameObject _model;
 
+        private PlayerInputActions _input;
+        private PlayerInputActions.PlayerActions _player;
+
 
         private void OnEnable()
         {
@@ -46,6 +49,9 @@ namespace Game.Scripts.Player
 
             if (_anim == null)
                 Debug.Log("Failed to connect the Animator");
+            
+            InitInput();
+
         }
 
         private void Update()
@@ -54,12 +60,19 @@ namespace Game.Scripts.Player
                 CalcutateMovement();
 
         }
+        
+        private void InitInput()
+        {
+            _input = new PlayerInputActions();
+            _player = _input.Player;
+            _player.Enable();
+        }
 
         private void CalcutateMovement()
         {
             _playerGrounded = _controller.isGrounded;
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
+            float h = _player.Movement.ReadValue<Vector2>().x;
+            float v = _player.Movement.ReadValue<Vector2>().y;
 
             transform.Rotate(transform.up, h);
 
