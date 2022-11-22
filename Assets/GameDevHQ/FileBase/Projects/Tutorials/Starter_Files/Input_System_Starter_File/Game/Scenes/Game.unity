@@ -11857,6 +11857,7 @@ MonoBehaviour:
   _player: {fileID: 359860633}
   _drone: {fileID: 1073608670}
   _forklift: {fileID: 402105197}
+  _crate: {fileID: 147778361}
 --- !u!1 &735179419 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 9d76b14ce284b4364bd7dfb5511ef560, type: 3}
@@ -34560,7 +34561,7 @@ MonoBehaviour:
   _zoneType: 2
   _zoneID: 3
   _requiredID: 2
-  _displayMessage: Hack Cameras
+  _displayMessage: 
   _zoneItems: []
   _inventoryIcon: {fileID: 0}
   _keyState: 1
