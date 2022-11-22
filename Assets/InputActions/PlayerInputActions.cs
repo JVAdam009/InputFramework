@@ -262,9 +262,18 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
             ""id"": ""5df4411a-c20e-4f8a-a012-38ce26d788df"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""WASD"",
+                    ""type"": ""Value"",
+                    ""id"": ""26fa8e51-9b24-4a39-a0a1-b51ad9351cfd"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Lift"",
                     ""type"": ""Button"",
-                    ""id"": ""5ecf7a0e-a76a-4ec7-babd-0efb485e0d8d"",
+                    ""id"": ""5d7eaae0-e97f-4144-99de-cc50fddf6073"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -273,15 +282,92 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""9ace9eba-0638-499b-8719-47f426cfdb77"",
-                    ""path"": """",
+                    ""name"": ""2D Vector"",
+                    ""id"": ""88a7abd9-e083-4dce-ac7b-5fbf2e7a1413"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
-                    ""isComposite"": false,
+                    ""action"": ""WASD"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""faa70f3a-64aa-4131-9554-009f8fdd7bfd"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""4a55d29e-e31c-4d32-ac72-58b552b03250"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""c31951ad-11b0-4237-b4d7-dd520cd084c4"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert"",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""cc6ee5d7-b96c-4d53-b150-ee342535a388"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert"",
+                    ""groups"": """",
+                    ""action"": ""WASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""d5bb47b4-337a-4abe-8732-a7ce744fbdb6"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lift"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""d9fcc150-fdcc-4f94-b8de-9b1cdd73c631"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""132a6e50-adf7-4102-935f-b17f04bb000c"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -329,7 +415,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Drone_WASD = m_Drone.FindAction("WASD", throwIfNotFound: true);
         // Forklift
         m_Forklift = asset.FindActionMap("Forklift", throwIfNotFound: true);
-        m_Forklift_Newaction = m_Forklift.FindAction("New action", throwIfNotFound: true);
+        m_Forklift_WASD = m_Forklift.FindAction("WASD", throwIfNotFound: true);
+        m_Forklift_Lift = m_Forklift.FindAction("Lift", throwIfNotFound: true);
         // Crate
         m_Crate = asset.FindActionMap("Crate", throwIfNotFound: true);
         m_Crate_Newaction = m_Crate.FindAction("New action", throwIfNotFound: true);
@@ -507,12 +594,14 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     // Forklift
     private readonly InputActionMap m_Forklift;
     private IForkliftActions m_ForkliftActionsCallbackInterface;
-    private readonly InputAction m_Forklift_Newaction;
+    private readonly InputAction m_Forklift_WASD;
+    private readonly InputAction m_Forklift_Lift;
     public struct ForkliftActions
     {
         private @PlayerInputActions m_Wrapper;
         public ForkliftActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_Forklift_Newaction;
+        public InputAction @WASD => m_Wrapper.m_Forklift_WASD;
+        public InputAction @Lift => m_Wrapper.m_Forklift_Lift;
         public InputActionMap Get() { return m_Wrapper.m_Forklift; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -522,16 +611,22 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_ForkliftActionsCallbackInterface != null)
             {
-                @Newaction.started -= m_Wrapper.m_ForkliftActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_ForkliftActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_ForkliftActionsCallbackInterface.OnNewaction;
+                @WASD.started -= m_Wrapper.m_ForkliftActionsCallbackInterface.OnWASD;
+                @WASD.performed -= m_Wrapper.m_ForkliftActionsCallbackInterface.OnWASD;
+                @WASD.canceled -= m_Wrapper.m_ForkliftActionsCallbackInterface.OnWASD;
+                @Lift.started -= m_Wrapper.m_ForkliftActionsCallbackInterface.OnLift;
+                @Lift.performed -= m_Wrapper.m_ForkliftActionsCallbackInterface.OnLift;
+                @Lift.canceled -= m_Wrapper.m_ForkliftActionsCallbackInterface.OnLift;
             }
             m_Wrapper.m_ForkliftActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
+                @WASD.started += instance.OnWASD;
+                @WASD.performed += instance.OnWASD;
+                @WASD.canceled += instance.OnWASD;
+                @Lift.started += instance.OnLift;
+                @Lift.performed += instance.OnLift;
+                @Lift.canceled += instance.OnLift;
             }
         }
     }
@@ -585,7 +680,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     }
     public interface IForkliftActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnWASD(InputAction.CallbackContext context);
+        void OnLift(InputAction.CallbackContext context);
     }
     public interface ICrateActions
     {

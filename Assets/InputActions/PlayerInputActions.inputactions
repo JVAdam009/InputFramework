@@ -240,9 +240,18 @@
             "id": "5df4411a-c20e-4f8a-a012-38ce26d788df",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "WASD",
+                    "type": "Value",
+                    "id": "26fa8e51-9b24-4a39-a0a1-b51ad9351cfd",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Lift",
                     "type": "Button",
-                    "id": "5ecf7a0e-a76a-4ec7-babd-0efb485e0d8d",
+                    "id": "5d7eaae0-e97f-4144-99de-cc50fddf6073",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -251,15 +260,92 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "9ace9eba-0638-499b-8719-47f426cfdb77",
-                    "path": "",
+                    "name": "2D Vector",
+                    "id": "88a7abd9-e083-4dce-ac7b-5fbf2e7a1413",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
+                    "action": "WASD",
+                    "isComposite": true,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "faa70f3a-64aa-4131-9554-009f8fdd7bfd",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WASD",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "4a55d29e-e31c-4d32-ac72-58b552b03250",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WASD",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "c31951ad-11b0-4237-b4d7-dd520cd084c4",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "Invert",
+                    "groups": "",
+                    "action": "WASD",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "cc6ee5d7-b96c-4d53-b150-ee342535a388",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "Invert",
+                    "groups": "",
+                    "action": "WASD",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "d5bb47b4-337a-4abe-8732-a7ce744fbdb6",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Lift",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "d9fcc150-fdcc-4f94-b8de-9b1cdd73c631",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Lift",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "132a6e50-adf7-4102-935f-b17f04bb000c",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Lift",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },

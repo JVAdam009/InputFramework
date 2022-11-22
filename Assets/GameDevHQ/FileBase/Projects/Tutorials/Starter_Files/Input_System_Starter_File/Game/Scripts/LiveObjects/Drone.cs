@@ -79,10 +79,13 @@ namespace Game.Scripts.LiveObjects
 
         public void ExitDroneMode()
         {
-            _inFlightMode = false;
-            onExitFlightmode?.Invoke();
-            ExitFlightMode();
-            InputManager.Instance.ActivatePlayer();
+            if (_inFlightMode)
+            {
+                _inFlightMode = false;
+                onExitFlightmode?.Invoke();
+                ExitFlightMode();
+                InputManager.Instance.ActivatePlayer();
+            }
         }
 
         private void FixedUpdate()

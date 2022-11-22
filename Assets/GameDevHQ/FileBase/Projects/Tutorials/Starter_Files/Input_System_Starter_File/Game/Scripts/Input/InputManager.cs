@@ -6,6 +6,7 @@ using Game.Scripts.Player;
 using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private Player _player;
     [SerializeField] private Drone _drone;
-
+    [SerializeField] private Forklift _forklift;
 
     private void Awake()
     {
@@ -61,12 +62,19 @@ public class InputManager : MonoBehaviour
     {
         CalculatePlayerMovement();
         CalculateDrone();
+        CalculateForklift();
     }
 
     void CalculateDrone()
     {
         _drone.SetMovementDirection(_droneActions.WASD.ReadValue<Vector2>());
         _drone.SetThrustDirection(_droneActions.Thrust.ReadValue<float>());
+    }
+
+    void CalculateForklift()
+    {
+        _forklift.SetLift(_forkliftActions.Lift.ReadValue<float>());
+        _forklift.SetMovement(_forkliftActions.WASD.ReadValue<Vector2>());
     }
 
     private void InitInput()
@@ -76,9 +84,16 @@ public class InputManager : MonoBehaviour
         _playerActions.Enable();
         _zonesActions = _input.IneractiveZones;
         _zonesActions.Enable();
+        _zonesActions.Escape.performed += EscapeOnperformed;
         _droneActions = _input.Drone;
         _forkliftActions = _input.Forklift;
         _crateActions = _input.Crate;
+    }
+
+    private void EscapeOnperformed(InputAction.CallbackContext obj)
+    {
+        _drone.ExitDroneMode();
+        _forklift.ExitDriveMode();
     }
 
     public void ActivatePlayer()
@@ -95,7 +110,7 @@ public class InputManager : MonoBehaviour
         _droneActions.Enable();
         _forkliftActions.Disable();
         _playerActions.Disable();
-        _zonesActions.Disable();
+        _zonesActions.Enable();
         _crateActions.Disable();
     }
 
@@ -104,7 +119,7 @@ public class InputManager : MonoBehaviour
         _droneActions.Disable();
         _forkliftActions.Enable();
         _playerActions.Disable();
-        _zonesActions.Disable();
+        _zonesActions.Enable();
         _crateActions.Disable();
     }
 }
