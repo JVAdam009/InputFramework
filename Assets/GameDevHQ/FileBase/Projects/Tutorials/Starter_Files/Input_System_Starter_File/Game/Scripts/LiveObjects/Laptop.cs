@@ -73,7 +73,7 @@ namespace Game.Scripts.LiveObjects
             {
                 InteractableZone_onHoldStarted(_interactableZone.GetZoneID());
             }
-            else if(_interactableZone.InZone())
+            else if(obj.interaction is PressInteraction &&_interactableZone.InZone())
             {
                 interacting = true;
                 InteractableZone_onHoldStarted(_interactableZone.GetZoneID());

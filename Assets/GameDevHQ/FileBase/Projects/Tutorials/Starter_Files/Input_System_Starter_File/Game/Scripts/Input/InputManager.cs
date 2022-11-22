@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 public class InputManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class InputManager : MonoBehaviour
             if (_instance == null)
             {
                 _instance = new InputManager();
+                _instance.InitInput();
             }
 
             return _instance;
@@ -35,11 +37,11 @@ public class InputManager : MonoBehaviour
 
     private PlayerInputActions.ForkliftActions _forkliftActions;
 
-    private PlayerInputActions.CrateActions _crateActions;
 
     [SerializeField] private Player _player;
     [SerializeField] private Drone _drone;
     [SerializeField] private Forklift _forklift;
+    [SerializeField] private Crate _crate;
 
     private void Awake()
     {
@@ -85,9 +87,23 @@ public class InputManager : MonoBehaviour
         _zonesActions = _input.IneractiveZones;
         _zonesActions.Enable();
         _zonesActions.Escape.performed += EscapeOnperformed;
+        _zonesActions.Interact.performed += InteractOnperformed;
         _droneActions = _input.Drone;
         _forkliftActions = _input.Forklift;
-        _crateActions = _input.Crate;
+
+        InteractableZone.ZoneActions = _zonesActions;
+    }
+
+    private void InteractOnperformed(InputAction.CallbackContext obj)
+    {
+        if (obj.interaction is TapInteraction)
+        {
+            _crate.TapPunch();
+        }
+        else if (obj.interaction is HoldInteraction)
+        {
+            _crate.HoldPunch();
+        }
     }
 
     private void EscapeOnperformed(InputAction.CallbackContext obj)
@@ -102,7 +118,6 @@ public class InputManager : MonoBehaviour
         _forkliftActions.Disable();
         _playerActions.Enable();
         _zonesActions.Enable();
-        _crateActions.Enable();
     }
 
     public void ActivateDrone()
@@ -111,7 +126,6 @@ public class InputManager : MonoBehaviour
         _forkliftActions.Disable();
         _playerActions.Disable();
         _zonesActions.Enable();
-        _crateActions.Disable();
     }
 
     public void ActivateForklift()
@@ -120,6 +134,5 @@ public class InputManager : MonoBehaviour
         _forkliftActions.Enable();
         _playerActions.Disable();
         _zonesActions.Enable();
-        _crateActions.Disable();
     }
 }

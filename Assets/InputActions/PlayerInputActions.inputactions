@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Punch",
+                    "type": "Button",
+                    "id": "83d31e1c-083d-42b4-b797-d49a3bb9352b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap,Hold(duration=1)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -70,6 +79,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "e80616b2-0603-4ae5-95a8-02211bdc69be",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Punch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -83,7 +103,7 @@
                     "id": "0e0c89be-6e09-4a89-ad25-f02ccffe05bf",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap,Press,Hold(duration=0.7)",
                     "initialStateCheck": false
                 },
                 {
@@ -346,34 +366,6 @@
                     "action": "Lift",
                     "isComposite": false,
                     "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "Crate",
-            "id": "53e56863-0d34-4f6a-8e0a-044c65db017c",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "a24c316b-ac21-4749-b5ea-88a1c88ebaed",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "5f41e511-3e10-4d97-81f2-39fe3e95469f",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }

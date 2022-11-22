@@ -61,7 +61,20 @@ namespace Game.Scripts.LiveObjects
             }
         }
 
-        private PlayerInputActions.IneractiveZonesActions _zonesActions;
+        public static PlayerInputActions.IneractiveZonesActions ZoneActions
+        {
+            get
+            {
+                return _zonesActions;
+            }
+            set
+            {
+                _zonesActions = value;
+                _zonesActions.Enable();
+            }
+        }
+
+        private static PlayerInputActions.IneractiveZonesActions _zonesActions;
 
         private bool _keyHeld = false;
         private bool _keyPressed = false;
@@ -75,13 +88,13 @@ namespace Game.Scripts.LiveObjects
 
         private void Start()
         {
-                _zonesActions = InputManager.Instance._input.IneractiveZones;
-                _zonesActions.Enable();
-                _zonesActions.Interact.performed += Interacted;
-                _zonesActions.Interact.canceled += InteractionStopped;
 
+            _zonesActions.Interact.performed += Interacted;
+            _zonesActions.Interact.canceled += InteractionStopped;
                 keyID = _zonesActions.Interact.controls[0].name.ToUpper();
         }
+        
+        
 
         private void InteractionStopped(InputAction.CallbackContext obj)
         {
@@ -95,7 +108,7 @@ namespace Game.Scripts.LiveObjects
             {
                 _keyHeld = true;
             }
-            else
+            else if (obj.interaction is PressInteraction)
             {
                 _keyPressed = true;
             }
